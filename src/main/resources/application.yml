@@ -1,0 +1,17 @@
+# Configurações do PostgreSQL
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/products
+    username: postgres
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  # Configurações do MongoDB
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: products
