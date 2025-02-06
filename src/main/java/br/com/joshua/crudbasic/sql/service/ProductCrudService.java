@@ -1,12 +1,13 @@
 package br.com.joshua.crudbasic.sql.service;
 
-import br.com.joshua.crudbasic.sql.domain.Product;
+import br.com.joshua.crudbasic.sql.domain.dto.ProductRequest;
+import br.com.joshua.crudbasic.sql.domain.dto.ProductResponse;
 
 import java.util.List;
 
 public interface ProductCrudService {
 
-    List<Product> findAll();
-    Product create(Product product);
-    List<Product> searchByDescription(String keyword);
+    List<ProductResponse> findAll();
+    ProductResponse create(ProductRequest product);
+    List<ProductResponse> searchByDescription(String keyword);
 }

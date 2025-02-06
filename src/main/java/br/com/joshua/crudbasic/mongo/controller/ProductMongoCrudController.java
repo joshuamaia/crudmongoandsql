@@ -1,7 +1,8 @@
 package br.com.joshua.crudbasic.mongo.controller;
 
-import br.com.joshua.crudbasic.mongo.domain.Product;
+import br.com.joshua.crudbasic.mongo.domain.dto.ProductRequest;
 import br.com.joshua.crudbasic.mongo.service.ProductCrudService;
+import br.com.joshua.crudbasic.mongo.domain.dto.ProductResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,17 +18,17 @@ public class ProductMongoCrudController {
     private final ProductCrudService productCrudService;
 
     @GetMapping("/all")
-    public ResponseEntity<List<Product>> findAll() {
+    public ResponseEntity<List<ProductResponse>> findAll() {
         return ResponseEntity.of(Optional.ofNullable(productCrudService.findAll()));
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Product> create(@RequestBody Product product) {
+    public ResponseEntity<ProductResponse> create(@RequestBody ProductRequest product) {
         return ResponseEntity.of(Optional.ofNullable(productCrudService.create(product)));
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Product>> searchByDescription(@RequestParam String keyword) {
+    public ResponseEntity<List<ProductResponse>> searchByDescription(@RequestParam String keyword) {
         return ResponseEntity.of(Optional.ofNullable(productCrudService.searchByDescription(keyword)));
     }
 

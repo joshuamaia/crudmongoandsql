@@ -1,4 +1,3 @@
-# Configurações do PostgreSQL
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/products
@@ -9,7 +8,6 @@ spring:
       ddl-auto: update
     show-sql: true
 
-  # Configurações do MongoDB
   data:
     mongodb:
       host: localhost

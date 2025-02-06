@@ -1,31 +1,38 @@
 package br.com.joshua.crudbasic.mongo.service.impl;
 
-import br.com.joshua.crudbasic.mongo.domain.Product;
+import br.com.joshua.crudbasic.mongo.domain.dto.ProductRequest;
+import br.com.joshua.crudbasic.mongo.domain.dto.ProductResponse;
+import br.com.joshua.crudbasic.mongo.mapper.ProductMongoMapper;
 import br.com.joshua.crudbasic.mongo.repository.ProductMongoRepository;
 import br.com.joshua.crudbasic.mongo.service.ProductCrudService;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
 public class ProductMongoCrudServiceImpl implements ProductCrudService {
 
     private final ProductMongoRepository productMongoRepository;
 
-    @Override
-    public List<Product> findAll() {
-        return productMongoRepository.findAll();
+    private final ProductMongoMapper productMapper;
+
+    public ProductMongoCrudServiceImpl(ProductMongoRepository productMongoRepository, ProductMongoMapper productMapper) {
+        this.productMongoRepository = productMongoRepository;
+        this.productMapper = productMapper;
     }
 
     @Override
-    public Product create(Product product) {
-        return productMongoRepository.save(product);
+    public List<ProductResponse> findAll() {
+        return productMapper.toDTOList(productMongoRepository.findAll());
     }
 
     @Override
-    public List<Product> searchByDescription(String keyword) {
-        return productMongoRepository.searchByDescription(keyword);
+    public ProductResponse create(ProductRequest product) {
+        return productMapper.toResponse(productMongoRepository.save(productMapper.toEntity(product)));
+    }
+
+    @Override
+    public List<ProductResponse> searchByDescription(String keyword) {
+        return productMapper.toDTOList(productMongoRepository.searchByDescription(keyword));
     }
 }

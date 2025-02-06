@@ -1,32 +1,38 @@
 package br.com.joshua.crudbasic.sql.service.impl;
 
 
-import br.com.joshua.crudbasic.sql.domain.Product;
+import br.com.joshua.crudbasic.sql.domain.dto.ProductRequest;
+import br.com.joshua.crudbasic.sql.domain.dto.ProductResponse;
+import br.com.joshua.crudbasic.sql.mapper.ProductSqlMapper;
 import br.com.joshua.crudbasic.sql.repository.ProductSqlRepository;
 import br.com.joshua.crudbasic.sql.service.ProductCrudService;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
 public class ProductSqlCrudServiceImpl implements ProductCrudService {
 
     private final ProductSqlRepository productSqlRepository;
+    private final ProductSqlMapper productMapper;
 
-    @Override
-    public List<Product> findAll() {
-        return productSqlRepository.findAll();
+    public ProductSqlCrudServiceImpl(ProductSqlRepository productSqlRepository, ProductSqlMapper productMapper) {
+        this.productSqlRepository = productSqlRepository;
+        this.productMapper = productMapper;
     }
 
     @Override
-    public Product create(Product product) {
-        return productSqlRepository.save(product);
+    public List<ProductResponse> findAll() {
+        return productMapper.toDTOList(productSqlRepository.findAll());
     }
 
     @Override
-    public List<Product> searchByDescription(String keyword) {
-        return productSqlRepository.searchByDescription(keyword);
+    public ProductResponse create(ProductRequest product) {
+        return productMapper.toResponse(productSqlRepository.save(productMapper.toEntity(product)));
+    }
+
+    @Override
+    public List<ProductResponse> searchByDescription(String keyword) {
+        return productMapper.toDTOList(productSqlRepository.searchByDescription(keyword));
     }
 }
