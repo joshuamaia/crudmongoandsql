@@ -26,4 +26,9 @@ public class ProductSqlCrudController {
         return ResponseEntity.of(Optional.ofNullable(productCrudService.create(product)));
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<Product>> searchByDescription(@RequestParam String keyword) {
+        return ResponseEntity.of(Optional.ofNullable(productCrudService.searchByDescription(keyword)));
+    }
+
 }

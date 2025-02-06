@@ -23,4 +23,9 @@ public class ProductMongoCrudServiceImpl implements ProductCrudService {
     public Product create(Product product) {
         return productMongoRepository.save(product);
     }
+
+    @Override
+    public List<Product> searchByDescription(String keyword) {
+        return productMongoRepository.searchByDescription(keyword);
+    }
 }

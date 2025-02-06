@@ -24,4 +24,9 @@ public class ProductSqlCrudServiceImpl implements ProductCrudService {
     public Product create(Product product) {
         return productSqlRepository.save(product);
     }
+
+    @Override
+    public List<Product> searchByDescription(String keyword) {
+        return productSqlRepository.searchByDescription(keyword);
+    }
 }

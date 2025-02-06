@@ -8,4 +8,5 @@ public interface ProductCrudService {
 
     List<Product> findAll();
     Product create(Product product);
+    List<Product> searchByDescription(String keyword);
 }
