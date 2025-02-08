@@ -4,6 +4,8 @@ import br.com.joshua.crudbasic.mongo.domain.dto.ProductRequest;
 import br.com.joshua.crudbasic.mongo.service.ProductCrudService;
 import br.com.joshua.crudbasic.mongo.domain.dto.ProductResponse;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,9 +19,9 @@ public class ProductMongoCrudController {
 
     private final ProductCrudService productCrudService;
 
-    @GetMapping("/all")
-    public ResponseEntity<List<ProductResponse>> findAll() {
-        return ResponseEntity.of(Optional.ofNullable(productCrudService.findAll()));
+    @PostMapping("/all")
+    public ResponseEntity<Page<ProductResponse>> findAll(@RequestBody ProductRequest product, Pageable pageable) {
+        return ResponseEntity.of(Optional.ofNullable(productCrudService.findAll(product, pageable)));
     }
 
     @PostMapping("/create")
