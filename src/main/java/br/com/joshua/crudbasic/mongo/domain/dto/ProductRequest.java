@@ -18,4 +18,6 @@ public class ProductRequest {
     private BigDecimal price;
     private Integer stockQuantity;
     private LocalDate createdAt;
+    private Integer page;
+    private Integer size;
 }
